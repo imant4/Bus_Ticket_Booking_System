@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bus Ticket Booking System</title>
+
+<style>
+body{
+font-family:Arial;
+background:#eee;
+}
+
+.container{
+width:600px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+input,button{
+width:100%;
+padding:10px;
+margin:5px;
+}
+
+button{
+background:blue;
+color:white;
+border:0;
+}
+
+h2{
+color:darkblue;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Bus Ticket Booking System</h1>
+
+
+<h2>Passenger</h2>
+
+<input id="pname" placeholder="Name">
+<input id="cnic" placeholder="CNIC">
+<input id="gender" placeholder="Gender">
+<input id="phone" placeholder="Phone">
+<input id="email" placeholder="Email">
+<input id="address" placeholder="Address">
+
+<button onclick="passenger()">Add Passenger</button>
+
+
+
+<h2>Bus</h2>
+
+<input id="busname" placeholder="Bus Name">
+<input id="busnumber" placeholder="Bus Number">
+<input id="bustype" placeholder="Bus Type">
+<input id="seats" placeholder="Total Seats">
+
+<button onclick="bus()">Add Bus</button>
+
+
+
+<h2>Route</h2>
+
+<input id="source" placeholder="Source City">
+<input id="destination" placeholder="Destination City">
+<input id="distance" placeholder="Distance">
+
+<button onclick="route()">Add Route</button>
+
+
+
+<h2>Schedule</h2>
+
+<input id="busid" placeholder="Bus ID">
+<input id="routeid" placeholder="Route ID">
+<input id="departure" placeholder="Departure Time">
+<input id="arrival" placeholder="Arrival Time">
+
+<button onclick="schedule()">Add Schedule</button>
+
+
+
+<h2>Booking</h2>
+
+<input id="pid" placeholder="Passenger ID">
+<input id="sid" placeholder="Schedule ID">
+<input id="date" placeholder="Booking Date">
+<input id="seatno" placeholder="Number Of Seats">
+
+<button onclick="booking()">Add Booking</button>
+
+
+
+<h2>Ticket</h2>
+
+<input id="bid" placeholder="Booking ID">
+<input id="seat" placeholder="Seat Number">
+<input id="price" placeholder="Ticket Price">
+<input id="travel" placeholder="Travel Date">
+
+<button onclick="ticket()">Add Ticket</button>
+
+
+
+<h2>Payment</h2>
+
+<input id="bookingid" placeholder="Booking ID">
+<input id="method" placeholder="Payment Method">
+<input id="amount" placeholder="Amount">
+<input id="paydate" placeholder="Payment Date">
+<input id="status" placeholder="Status">
+
+<button onclick="payment()">Add Payment</button>
+
+
+</div>
+
+
+<script>
+
+function send(url,data){
+
+fetch("http://localhost:3000/"+url,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+})
+.then(res=>res.text())
+.then(alert);
+
+}
+
+
+
+function passenger(){
+
+send("passenger",{
+Name:pname.value,
+CNIC:cnic.value,
+Gender:gender.value,
+Phone_Number:phone.value,
+Email:email.value,
+Address:address.value
+});
+
+}
+
+
+
+function bus(){
+
+send("bus",{
+name:busname.value,
+number:busnumber.value,
+type:bustype.value,
+total_Seats:seats.value
+});
+
+}
+
+
+
+function route(){
+
+send("route",{
+Source_City:source.value,
+Destination_City:destination.value,
+Distance_KM:distance.value
+});
+
+}
+
+
+
+function schedule(){
+
+send("schedule",{
+Bus_ID:busid.value,
+Route_ID:routeid.value,
+Departure_Time:departure.value,
+Arrival_Time:arrival.value
+});
+
+}
+
+
+
+function booking(){
+
+send("booking",{
+Passenger_ID:pid.value,
+Schedule_ID:sid.value,
+Booking_Date:date.value,
+Number_Of_Seats:seatno.value
+});
+
+}
+
+
+
+function ticket(){
+
+send("ticket",{
+Booking_ID:bid.value,
+Seat_Number:seat.value,
+Ticket_Price:price.value,
+Travel_Date:travel.value
+});
+
+}
+
+
+
+function payment(){
+
+send("payment",{
+Booking_ID:bookingid.value,
+Payment_Method:method.value,
+Amount:amount.value,
+Payment_Date:paydate.value,
+Payment_Status:status.value
+});
+
+}
+
+</script>
+
+
+</body>
+</html>
